@@ -1,6 +1,4 @@
 import React, { useState, Fragment } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, incrementAsync, selectCount } from '../features/product-list/productListSlice'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
@@ -97,8 +95,6 @@ const products = [
 ];
 
 export default function ProductList() {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
