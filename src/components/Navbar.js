@@ -1,10 +1,11 @@
 import React from 'react';
-import { Disclosure, Menu} from '@headlessui/react';
+import { Disclosure, Menu } from '@headlessui/react';
 import {
   Bars3Icon,
   ShoppingCartIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import logo from '../assets/logo.png'
 
 const user = {
   name: 'Tom Cook',
@@ -13,8 +14,8 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 };
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
+  { name: 'Home', href: '#', current: true },
+  { name: 'Products', href: '#', current: false },
 ];
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -30,7 +31,7 @@ function NavBar({ children }) {
   return (
     <>
       <div>
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-[#362744]">
           {({ open }) => (
             <>
               <div className="px-4 sm:px-6 lg:px-8">
@@ -38,9 +39,9 @@ function NavBar({ children }) {
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <img
-                        className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company"
+                        className="h-8"
+                        src={logo}
+                        alt="EBAZAR"
                       />
                     </div>
                     <div className="hidden md:block">
@@ -51,8 +52,8 @@ function NavBar({ children }) {
                             href={item.href}
                             className={classNames(
                               item.current
-                                ? 'bg-gray-900 text-white'
-                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                ? 'bg-[#44354f] text-white'
+                                : 'text-gray-300 hover:bg-[#44354f] hover:text-white',
                               'rounded-md px-3 py-2 text-sm font-medium'
                             )}
                             aria-current={item.current ? 'page' : undefined}
@@ -89,23 +90,23 @@ function NavBar({ children }) {
                             />
                           </Menu.Button>
                         </div>
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {userNavigation.map((item) => (
-                              <Menu.Item key={item.name}>
-                                {({ active }) => (
-                                  <a
-                                    href={item.href}
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
-                                  >
-                                    {item.name}
-                                  </a>
-                                )}
-                              </Menu.Item>
-                            ))}
-                          </Menu.Items>
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          {userNavigation.map((item) => (
+                            <Menu.Item key={item.name}>
+                              {({ active }) => (
+                                <a
+                                  href={item.href}
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700'
+                                  )}
+                                >
+                                  {item.name}
+                                </a>
+                              )}
+                            </Menu.Item>
+                          ))}
+                        </Menu.Items>
                       </Menu>
                     </div>
                   </div>
@@ -137,8 +138,8 @@ function NavBar({ children }) {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? 'bg-gray-900 text-white'
-                          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          ? 'bg-[#44354f] text-white'
+                          : 'text-gray-300 hover:bg-[#44354f] hover:text-white',
                         'block rounded-md px-3 py-2 text-base font-medium'
                       )}
                       aria-current={item.current ? 'page' : undefined}
@@ -172,10 +173,9 @@ function NavBar({ children }) {
                         className="h-6 w-6"
                         aria-hidden="true"
                       />
-                    
                     </button>
                     <span className="inline-flex items-center rounded-md bg-red-50 mb-7 -ml-3 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-                        3
+                      3
                     </span>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
