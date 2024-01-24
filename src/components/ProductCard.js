@@ -1,13 +1,14 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 export default function ProductCard(props) {
   const { id, name, imageSrc, imageAlt, price, color } = props.data;
 
   return (
     <div
       key={id}
-      className="bg-[#ede0f7] shadow-lg m-3 w-[40%] sm:w-1/5 rounded"
+      className="bg-[#ede0f7] shadow-lg m-3 w-[40%] sm:w-1/5 text-white p-3 rounded transition-transform transform hover:scale-105"
     >
+      <Link to = '/productDetail'>
       <div>
         <img src={imageSrc} alt={imageAlt} />
       </div>
@@ -28,6 +29,7 @@ export default function ProductCard(props) {
           </div>
         </div>
       </div>
+      </Link>
     </div>
   );
 }

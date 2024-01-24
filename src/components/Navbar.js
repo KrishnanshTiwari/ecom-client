@@ -1,36 +1,41 @@
-import React from 'react';
-import { Disclosure, Menu } from '@headlessui/react';
+import React from "react";
+import { Disclosure, Menu } from "@headlessui/react";
 import {
   Bars3Icon,
   ShoppingCartIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline';
-import logo from '../assets/logo.png'
-
+} from "@heroicons/react/24/outline";
+import logo from "../assets/logo.png";
+import { Link, useLocation } from "react-router-dom";
 const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
+  name: "Tom Cook",
+  email: "tom@example.com",
   imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
-const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Products', href: '#', current: false },
-];
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 function NavBar({ children }) {
+  const location = useLocation();
+  const navigation = [
+    { name: "Home", to: "/", current: location.pathname === "/" },
+    {
+      name: "Products",
+      to: "/product",
+      current: location.pathname === "/product",
+    },
+  ];
+
+  const userNavigation = [
+    { name: "Your Profile", to: "/profile" },
+    { name: "Become a Seller", to: "/becomeSeller" },
+    { name: "Sign out", to: "/signup" },
+  ];
   return (
     <>
-      <div>
         <Disclosure as="nav" className="bg-[#362744]">
           {({ open }) => (
             <>
@@ -38,43 +43,41 @@ function NavBar({ children }) {
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-8"
-                        src={logo}
-                        alt="EBAZAR"
-                      />
+                      <Link to="/">
+                        <img className="h-8" src={logo} alt="EBAZAR" />
+                      </Link>
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
-                          <a
+                          <Link
                             key={item.name}
-                            href={item.href}
+                            to={item.to}
                             className={classNames(
                               item.current
-                                ? 'bg-[#44354f] text-white'
-                                : 'text-gray-300 hover:bg-[#44354f] hover:text-white',
-                              'rounded-md px-3 py-2 text-sm font-medium'
+                                ? "bg-[#44354f] text-white"
+                                : "text-gray-300 hover:bg-[#44354f] hover:text-white",
+                              "rounded-md px-3 py-2 text-sm font-medium"
                             )}
-                            aria-current={item.current ? 'page' : undefined}
+                            aria-current={item.current ? "page" : undefined}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
                   </div>
                   <div className="hidden md:block">
                     <div className="flex items-center">
-                      <button
-                        type="button"
+                      <Link
+                        to="/cart"
                         className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <ShoppingCartIcon
                           className="h-6 w-6"
                           aria-hidden="true"
                         />
-                      </button>
+                      </Link>
                       <span className="inline-flex items-center rounded-md mb-7 -ml-3 bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
                         3
                       </span>
@@ -90,19 +93,19 @@ function NavBar({ children }) {
                             />
                           </Menu.Button>
                         </div>
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Items className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
-                                <a
-                                  href={item.href}
+                                <Link
+                                  to={item.to}
                                   className={classNames(
-                                    active ? 'bg-gray-100' : '',
-                                    'block px-4 py-2 text-sm text-gray-700'
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
                                   )}
                                 >
                                   {item.name}
-                                </a>
+                                </Link>
                               )}
                             </Menu.Item>
                           ))}
@@ -135,16 +138,15 @@ function NavBar({ children }) {
                     <Disclosure.Button
                       key={item.name}
                       as="a"
-                      href={item.href}
                       className={classNames(
                         item.current
-                          ? 'bg-[#44354f] text-white'
-                          : 'text-gray-300 hover:bg-[#44354f] hover:text-white',
-                        'block rounded-md px-3 py-2 text-base font-medium'
+                          ? "bg-[#44354f] text-white"
+                          : "text-gray-300 hover:bg-[#44354f] hover:text-white",
+                        "block rounded-md px-3 py-2 text-base font-medium"
                       )}
-                      aria-current={item.current ? 'page' : undefined}
+                      aria-current={item.current ? "page" : undefined}
                     >
-                      {item.name}
+                      <Link to={item.to}>{item.name}</Link>
                     </Disclosure.Button>
                   ))}
                 </div>
@@ -165,15 +167,15 @@ function NavBar({ children }) {
                         {user.email}
                       </div>
                     </div>
-                    <button
-                      type="button"
+                    <Link
+                      to="/cart"
                       className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
                       <ShoppingCartIcon
                         className="h-6 w-6"
                         aria-hidden="true"
                       />
-                    </button>
+                    </Link>
                     <span className="inline-flex items-center rounded-md bg-red-50 mb-7 -ml-3 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
                       3
                     </span>
@@ -183,7 +185,7 @@ function NavBar({ children }) {
                       <Disclosure.Button
                         key={item.name}
                         as="a"
-                        href={item.href}
+                        to={item.to}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
                         {item.name}
@@ -195,7 +197,6 @@ function NavBar({ children }) {
             </>
           )}
         </Disclosure>
-      </div>
     </>
   );
 }
