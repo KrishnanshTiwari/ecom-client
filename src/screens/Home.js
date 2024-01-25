@@ -50,7 +50,7 @@ const products = [
 ];
 function Home() {
   return (
-    <div className="bg-[#fcf6fc] pb-6">
+    <div className="pb-6">
       <div className="relative bg-gradient-to-r from-yellow-500 to-pink-500 text-white">
         {/* Colorful background */}
         <div className="absolute top-4 bottom-0 left-0">
