@@ -12,6 +12,8 @@ import Cart from './screens/Cart';
 import Productdetail from './screens/Productdetail';
 import Profile from './screens/Profile';
 import BecomeSeller from './screens/BecomeSeller';
+import AddProduct from './screens/AddProduct';
+import ProductDashboard from './screens/ProductDashboard';
 function App() {
   return (
     <Router>
@@ -26,6 +28,8 @@ function App() {
           <Route path="/productDetail" element={<Productdetail />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/becomeSeller" element={<BecomeSeller/>} />
+          <Route path="/add-product" element={<AddProduct/>} />
+          <Route path="/product-dashboard" element={<ProductDashboard/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
