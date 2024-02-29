@@ -1,5 +1,5 @@
 import React from "react";
-
+import Button1 from "../components/Button1";
 function AddProduct() {
   return (
     <>
@@ -108,12 +108,7 @@ function AddProduct() {
             </div>
           </div>
           <div class="flex justify-end">
-          <button
-            type="submit"
-            className="flex text-xl justify-center rounded-md bg-[#4d2f62] px-4 py-2 font-bold leading-6 text-white shadow-sm hover:bg-purple-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Submit
-          </button>
+            <Button1 data="Submit" />
           </div>
         </form>
       </div>

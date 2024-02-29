@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+import Button1 from "../components/Button1";
 const products = [
   {
     id: 1,
@@ -67,18 +69,8 @@ function ProductDashboard() {
         </ul>
       </div>
       <div className="flex flex-row justify-between mt-5 mb-7 px-12 sm:px-16 lg:px-20">
-        <button
-          type="submit"
-          className="flex text-xl justify-center rounded-md bg-[#4d2f62] px-4 py-2 font-bold leading-6 text-white shadow-sm hover:bg-purple-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Browse Orders
-        </button>
-        <button
-          type="submit"
-          className="flex text-xl justify-center rounded-md bg-[#4d2f62] px-4 py-2 font-bold leading-6 text-white shadow-sm hover:bg-purple-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Add Product
-        </button>
+        <Link to = '/ '><Button1 data = "Browse orders" /></Link>
+        <Link to = '/add-product'><Button1 data = "Add Product" /></Link>
       </div>
     </>
   );

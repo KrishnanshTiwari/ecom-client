@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Link } from 'react-router-dom';
+import Button1 from "../components/Button1";
 export default function Profile() {
   return (
     <div className="min-h-[60vh] flex justify-center items-center py-6">
@@ -72,18 +73,8 @@ export default function Profile() {
         </div>
 
         <div className="flex flex-row justify-between mt-5">
-          <button
-            type="submit"
-            className="flex text-xl justify-center rounded-md bg-[#4d2f62] px-4 py-2 font-bold leading-6 text-white shadow-sm hover:bg-purple-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Your Orders
-          </button>
-          <button
-            type="submit"
-            className="flex text-xl justify-center rounded-md bg-[#4d2f62] px-4 py-2 font-bold leading-6 text-white shadow-sm hover:bg-purple-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Become a Seller
-          </button>
+          <Link to = '/'><Button1 data = "Your Orders" /></Link>
+          <Link to='/become-seller'><Button1 data = "Become a Seller" /></Link>
         </div>
       </div>
     </div>

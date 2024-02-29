@@ -1,9 +1,9 @@
 import React from "react";
-
+import Button1 from "../components/Button1";
 export default function BecomeSeller() {
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#2d163f]">
+      <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-[#2d163f]">
         Become a Seller
       </h2>
 
@@ -90,12 +90,7 @@ export default function BecomeSeller() {
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-[#4d2f62] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Save Details
-            </button>
+            <Button1 data="Save Details" />
           </div>
         </form>
       </div>

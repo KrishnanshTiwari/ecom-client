@@ -49,7 +49,7 @@ const Footer = () => {
           <h2 className="text-lg font-bold mb-2">Helpful Links</h2>
           <ul>
             <li>
-              <Link to="/becomeSeller">Become a Seller</Link>
+              <Link to="/become-seller">Become a Seller</Link>
             </li>
             <li>
               <Link to="/product">Shop Now</Link>

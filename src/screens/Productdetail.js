@@ -1,5 +1,6 @@
 import React from "react";
-
+import Button1 from "../components/Button1";
+import { Link } from 'react-router-dom';
 function Productdetail() {
   return (
     <>
@@ -29,13 +30,8 @@ function Productdetail() {
           <div className="mt-4 font-semibold text-lg text-[#2d163f]">
             <h3>Seller : Shukla Abhishek</h3>
           </div>
-          <div className="absolute bottom-0 right-0">
-          <button
-            type="submit"
-            className="flex text-xl justify-center rounded-md bg-[#4d2f62] px-4 py-2 font-bold leading-6 text-white shadow-sm hover:bg-purple-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Checkout
-          </button>
+          <div className="absolute bottom-1 right-1">
+            <Link to = "/" ><Button1 data = "Checkout Page" /></Link>
           </div>
         </div>
       </div>

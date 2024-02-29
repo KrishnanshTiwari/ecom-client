@@ -31,7 +31,7 @@ function NavBar({ children }) {
 
   const userNavigation = [
     { name: "Your Profile", to: "/profile" },
-    { name: "Become a Seller", to: "/becomeSeller" },
+    { name: "Become a Seller", to: "/become-seller" },
     { name: "Sign out", to: "/login" },
   ];
   return (

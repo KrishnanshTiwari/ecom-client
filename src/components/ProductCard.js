@@ -8,7 +8,7 @@ export default function ProductCard(props) {
       key={id}
       className="bg-[#ede0f7] shadow-lg m-3 w-[40%] sm:w-1/5 text-white p-3 rounded transition-transform transform hover:scale-105"
     >
-      <Link to = '/productDetail'>
+      <Link to = '/product-detail'>
       <div>
         <img src={imageSrc} alt={imageAlt} />
       </div>
