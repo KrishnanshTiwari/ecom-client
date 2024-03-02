@@ -99,7 +99,6 @@ export default function Product() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
-    <div className="bg-white">
       <div>
         {/* Mobile filter dialog */}
         <div>
@@ -188,19 +187,19 @@ export default function Product() {
           </Dialog>
         </div>
 
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+        <main className="px-4 sm:px-6 lg:px-8">
+          <div className="flex items-baseline justify-between pb-6 pt-24">
+            <h1 className="text-4xl font-bold tracking-tight text-[#2d163f]">
               All Products
             </h1>
 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
-                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                  <Menu.Button className="inline-flex justify-center text-sm font-medium text-[#5d476e] hover:text-[#2d163f]">
                     Sort
                     <ChevronDownIcon
-                      className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                      className="-mr-1 ml-1 h-5 w-5 flex-shrink-0"
                       aria-hidden="true"
                     />
                   </Menu.Button>
@@ -215,8 +214,8 @@ export default function Product() {
                             href={option.href}
                             className={classNames(
                               option.current
-                                ? "font-medium text-gray-900"
-                                : "text-gray-500",
+                                ? "font-medium text-[#2d163f]"
+                                : "text-[#5d476e]",
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm"
                             )}
@@ -232,20 +231,15 @@ export default function Product() {
 
               <button
                 type="button"
-                className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
+                className="ml-4 p-2 text-[#5d476e] hover:text-[#2d163f] sm:ml-6 lg:hidden"
                 onClick={() => setMobileFiltersOpen(true)}
               >
-                <span className="sr-only">Filters</span>
                 <FunnelIcon className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>
           </div>
 
-          <section aria-labelledby="products-heading" className="pb-24 pt-6">
-            <h2 id="products-heading" className="sr-only">
-              Products
-            </h2>
-
+          <section className="pb-24 pt-6 ">
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               {/* Filters */}
               <form className="hidden lg:block">
@@ -310,38 +304,36 @@ export default function Product() {
 
               {/* Product grid */}
               <div className="lg:col-span-3">
-                {/* This is our products list  */}
                 <div className="flex flex-wrap pb-8 justify-around">
-                  {/* This is our products list  */}
-
                   {products.map((product) => (
                     <ProductCard data={product} />
                   ))}
                 </div>
               </div>
-              {/* Product grid end */}
+
             </div>
           </section>
 
-          {/* section of product and filters ends */}
-          <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+          {/* Pagination */}
+          <div className="flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6">
             <div className="flex flex-1 justify-between sm:hidden">
               <a
                 href="#"
-                className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="text-sm font-medium text-[#2d163f] hover:bg-gray-50"
               >
                 Previous
               </a>
               <a
                 href="#"
-                className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="text-sm font-medium text-[#2d163f] hover:bg-gray-50"
               >
                 Next
               </a>
             </div>
+
             <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-[#5d476e]">
                   Showing <span className="font-medium">1</span> to{" "}
                   <span className="font-medium">10</span> of{" "}
                   <span className="font-medium">97</span> results
@@ -356,20 +348,19 @@ export default function Product() {
                     href="#"
                     className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                   >
-                    <span className="sr-only">Previous</span>
                     <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
                   </a>
-                  {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
+
                   <a
                     href="#"
                     aria-current="page"
-                    className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="relative z-10 inline-flex items-center bg-[#4d2f62] px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     1
                   </a>
                   <a
                     href="#"
-                    className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                    className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-[#2d163f] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                   >
                     2
                   </a>
@@ -378,7 +369,6 @@ export default function Product() {
                     href="#"
                     className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                   >
-                    <span className="sr-only">Next</span>
                     <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
                   </a>
                 </nav>
@@ -387,6 +377,5 @@ export default function Product() {
           </div>
         </main>
       </div>
-    </div>
   );
 }
