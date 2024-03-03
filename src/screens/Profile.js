@@ -77,7 +77,7 @@ export default function Profile() {
           <Link to='/become-seller'><Button1 data = "Become a Seller" /></Link>
         </div>
         <div className="flex flex-row justify-between mt-5">
-          <Link to = '/'><Button1 data = "Edit Details" /></Link>
+          <Link to = '/edit-seller'><Button1 data = "Edit Details" /></Link>
           <Link to='/product-dashboard'><Button1 data = "Dashboard" /></Link>
         </div>
       </div>

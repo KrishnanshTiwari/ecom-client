@@ -14,6 +14,7 @@ import Profile from './screens/Profile';
 import BecomeSeller from './screens/BecomeSeller';
 import AddProduct from './screens/AddProduct';
 import ProductDashboard from './screens/ProductDashboard';
+import EditSeller from './screens/EditSeller';
 function App() {
   return (
     <Router>
@@ -30,6 +31,7 @@ function App() {
           <Route path="/become-seller" element={<BecomeSeller/>} />
           <Route path="/add-product" element={<AddProduct/>} />
           <Route path="/product-dashboard" element={<ProductDashboard/>} />
+          <Route path="/edit-seller" element={<EditSeller/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
