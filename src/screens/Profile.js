@@ -43,7 +43,6 @@ export default function Profile() {
           8477852016
         </div>
         <div>
-          <div className="text-xl font-semibold text-[#5d476e] "></div>
           <div class="py-4 px-6">
             <table class="w-full text-[#2d163f]">
               <tbody>

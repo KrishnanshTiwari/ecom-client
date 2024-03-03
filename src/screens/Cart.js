@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Button1 from '../components/Button1';
 import { Link } from "react-router-dom";
+import Button1 from "../components/Button1";
 
 const products = [
   {
@@ -30,14 +30,19 @@ const products = [
   // More products...
 ];
 
-export default function Cart() {
-  const [open, setOpen] = useState(true);
+const Cart = () => {
+  const [cartItems, setCartItems] = useState(products);
+
+  const removeItem = (id) => {
+    const updatedCartItems = cartItems.filter((item) => item.id !== id);
+    setCartItems(updatedCartItems);
+  };
 
   return (
     <>
       <div className="min-h-[60vh] mx-auto mt-12 max-w-7xl px-8 sm:px-12 lg:px-16 my-6 relative">
         <ul>
-          {products.map((product) => (
+          {cartItems.map((product) => (
             <li key={product.id} className="flex py-6">
               <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                 <img
@@ -50,48 +55,58 @@ export default function Cart() {
               <div className="ml-4 flex flex-1 flex-col">
                 <div>
                   <div className="flex justify-between text-base font-medium text-[#2d163f]">
-                    <h3>
-                      <Link to="/product-detail">{product.name}</Link>
-                    </h3>
+                    <h3>{product.name}</h3>
                     <p className="ml-4">{product.price}</p>
                   </div>
                   <p className="mt-1 text-sm text-[#5d476e]">{product.color}</p>
                 </div>
-                <div>
-                  <div className="flex justify-between text-base">
-                    <button
-                      type="button"
-                      className="font-medium text-purple-600 hover:text-purple-500"
+                <div className="flex justify-between text-base">
+                  <button
+                    type="button"
+                    className="font-medium text-purple-600 hover:text-purple-500"
+                    onClick={() => removeItem(product.id)}
+                  >
+                    Remove
+                  </button>
+                  <div className="flex items-center font-medium text-sm text-[#2d163f]">
+                    <label htmlFor={`quantity-${product.id}`} className="mr-2">
+                      Quantity:
+                    </label>
+                    <select
+                      id={`quantity-${product.id}`}
+                      name={`quantity-${product.id}`}
+                      value={product.quantity}
+                      onChange={(e) =>
+                        setCartItems((prevItems) =>
+                          prevItems.map((item) =>
+                            item.id === product.id
+                              ? { ...item, quantity: parseInt(e.target.value) }
+                              : item
+                          )
+                        )
+                      }
+                      className="border border-gray-300 rounded-md px-3 py-1"
                     >
-                      Remove
-                    </button>
-                    <div class="flex items-center font-medium text-sm text-[#2d163f]">
-                      <label for="quantity" class="mr-2">
-                        Quantity:
-                      </label>
-                      <select
-                        id="quantity"
-                        name="quantity"
-                        class="border border-gray-300 rounded-md px-3 py-1"
-                      >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="3">4</option>
-                        <option value="3">5</option>
-                        <option value="3">6</option>
-                        <option value="3">7</option>
-                        <option value="3">8</option>
-                      </select>
-                    </div>
+                      {[1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
+                        <option key={value} value={value}>
+                          {value}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
               </div>
             </li>
           ))}
         </ul>
-        <div className="absolute right-8 w-30"><Button1 data = "Checkout" /></div> 
+        <div className="absolute right-8 w-30">
+        <Link to="/checkout" state={{ cartItems: cartItems }} >
+          <Button1 data="Checkout" />
+        </Link>
+        </div>
       </div>
     </>
   );
-}
+};
+
+export default Cart;
