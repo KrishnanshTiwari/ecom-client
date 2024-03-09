@@ -40,7 +40,8 @@ const Cart = () => {
 
   return (
     <>
-      <div className="min-h-[60vh] mx-auto mt-12 max-w-7xl px-8 sm:px-12 lg:px-16 my-6 relative">
+      <div className="min-h-[60vh] mx-auto mt-12 pt-6 max-w-7xl px-8 sm:px-12 lg:px-16 my-6 relative">
+        <div className="bg-white mb-6">
         <ul>
           {cartItems.map((product) => (
             <li key={product.id} className="flex py-6">
@@ -99,7 +100,8 @@ const Cart = () => {
             </li>
           ))}
         </ul>
-        <div className="absolute right-8 w-30">
+        </div>
+        <div className="absolute right-8 sm:right-12 lg:right-16 w-30">
         <Link to="/checkout" state={{ cartItems: cartItems }} >
           <Button1 data="Checkout" />
         </Link>
