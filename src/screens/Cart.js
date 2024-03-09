@@ -41,7 +41,7 @@ const Cart = () => {
   return (
     <>
       <div className="min-h-[60vh] mx-auto mt-12 pt-6 max-w-7xl px-8 sm:px-12 lg:px-16 my-6 relative">
-        <div className="bg-white mb-6">
+        <div className="bg-white mb-6 px-3">
         <ul>
           {cartItems.map((product) => (
             <li key={product.id} className="flex py-6">
@@ -60,6 +60,10 @@ const Cart = () => {
                     <p className="ml-4">{product.price}</p>
                   </div>
                   <p className="mt-1 text-sm text-[#5d476e]">{product.color}</p>
+                  <div>
+                    <span className="text-yellow-500">★</span>
+                    <span className="text-sm text-gray-700 ml-1">4.5</span>
+                  </div>
                 </div>
                 <div className="flex justify-between text-base">
                   <button

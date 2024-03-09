@@ -16,6 +16,7 @@ import AddProduct from './screens/AddProduct';
 import ProductDashboard from './screens/ProductDashboard';
 import EditSeller from './screens/EditSeller';
 import Checkout from './screens/Checkout';
+import SellerOrder from './screens/SellerOrder';
 function App() {
   return (
     <Router>
@@ -34,6 +35,7 @@ function App() {
           <Route path="/product-dashboard" element={<ProductDashboard/>} />
           <Route path="/edit-seller" element={<EditSeller/>} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/seller-order" element={<SellerOrder/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />

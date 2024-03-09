@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 import Button1 from "../components/Button1";
+import { Link } from "react-router-dom";
 const products = [
   {
     id: 1,
@@ -28,7 +28,7 @@ const products = [
   },
   // More products...
 ];
-function ProductDashboard() {
+function SellerOrder() {
   return (
     <>
       <div className="min-h-[60vh] mx-auto mt-12 max-w-7xl px-8 sm:px-12 lg:px-16 my-6">
@@ -57,27 +57,16 @@ function ProductDashboard() {
                     <span className="text-sm text-gray-700 ml-1">4.5</span>
                   </div>
                 </div>
-                <div className="flex flex-1 items-end justify-between text-sm">
-                  <div className="flex">
-                    <button
-                      type="button"
-                      className="font-medium text-purple-600 hover:text-purple-500"
-                    >
-                      Remove
-                    </button>
-                  </div>
+                <div className="font-semibold pt-1 text-[#2d163f]">
+                  <div >Total Number of Orders : 3</div>
                 </div>
               </div>
             </li>
           ))}
         </ul>
       </div>
-      <div className="flex flex-row justify-between mt-5 mb-7 px-12 sm:px-16 lg:px-20">
-        <Link to = '/seller-order'><Button1 data = "Browse orders" /></Link>
-        <Link to = '/add-product'><Button1 data = "Add Product" /></Link>
-      </div>
     </>
   );
 }
 
-export default ProductDashboard;
+export default SellerOrder;
