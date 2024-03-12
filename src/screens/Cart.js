@@ -65,15 +65,15 @@ const Cart = () => {
                     <span className="text-sm text-gray-700 ml-1">4.5</span>
                   </div>
                 </div>
-                <div className="flex justify-between text-base">
+                <div className="flex justify-between sm:flex-row flex-col text-base">
                   <button
                     type="button"
-                    className="font-medium text-purple-600 hover:text-purple-500"
+                    className="font-medium text-purple-600 hover:text-purple-500 mb-2"
                     onClick={() => removeItem(product.id)}
                   >
                     Remove
                   </button>
-                  <div className="flex items-center font-medium text-sm text-[#2d163f]">
+                  <div className="flex justify-center items-center font-medium text-sm text-[#2d163f]">
                     <label htmlFor={`quantity-${product.id}`} className="mr-2">
                       Quantity:
                     </label>
