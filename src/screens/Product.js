@@ -87,7 +87,7 @@ export default function Product() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
-      <div className="bg-red-500">
+      <div>
         {/* Mobile filter dialog */}
         <div>
           <Dialog
@@ -105,7 +105,6 @@ export default function Product() {
                     className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
                     onClick={() => setMobileFiltersOpen(false)}
                   >
-                    <span className="sr-only">Close menu</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
