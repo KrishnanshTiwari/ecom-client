@@ -103,7 +103,7 @@ function Home() {
           {/* This is our products list  */}
 
           {products.map((product) => (
-            <ProductCard data={product} />
+            <ProductCard key={product.id} data={product} />
           ))}
         </div>
       </div>
@@ -117,7 +117,7 @@ function Home() {
           {/* This is our products list  */}
 
           {products.map((product) => (
-            <ProductCard data={product} />
+            <ProductCard key={product.id} data={product} />
           ))}
         </div>
       </div>

@@ -43,28 +43,28 @@ export default function Profile() {
           8477852016
         </div>
         <div>
-          <div class="py-4 px-6">
-            <table class="w-full text-[#2d163f]">
+          <div className="py-4 px-6">
+            <table className="w-full text-[#2d163f]">
               <tbody>
-                <tr class="bg-[#ddd4e5]">
-                  <td class="border border-gray-300 px-4 py-2">Bank</td>
-                  <td class="border border-gray-300 px-4 py-2">
+                <tr className="bg-[#ddd4e5]">
+                  <td className="border border-gray-300 px-4 py-2">Bank</td>
+                  <td className="border border-gray-300 px-4 py-2">
                     Your Bank Name
                   </td>
                 </tr>
-                <tr class="bg-white">
-                  <td class="border border-gray-300 px-4 py-2">
+                <tr className="bg-white">
+                  <td className="border border-gray-300 px-4 py-2">
                     Account Number
                   </td>
-                  <td class="border border-gray-300 px-4 py-2">1234567890</td>
+                  <td className="border border-gray-300 px-4 py-2">1234567890</td>
                 </tr>
-                <tr class="bg-[#ddd4e5]">
-                  <td class="border border-gray-300 px-4 py-2">IFSC</td>
-                  <td class="border border-gray-300 px-4 py-2">IFSC123456</td>
+                <tr className="bg-[#ddd4e5]">
+                  <td className="border border-gray-300 px-4 py-2">IFSC</td>
+                  <td className="border border-gray-300 px-4 py-2">IFSC123456</td>
                 </tr>
-                <tr class="bg-white">
-                  <td class="border border-gray-300 px-4 py-2">GST</td>
-                  <td class="border border-gray-300 px-4 py-2">GST123456789</td>
+                <tr className="bg-white">
+                  <td className="border border-gray-300 px-4 py-2">GST</td>
+                  <td className="border border-gray-300 px-4 py-2">GST123456789</td>
                 </tr>
               </tbody>
             </table>

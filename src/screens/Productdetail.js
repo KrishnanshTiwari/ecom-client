@@ -17,11 +17,11 @@ function Productdetail() {
         </div>
         <div className="flex flex-col p-5">
           <p className="text-justify text-sm font-semibold text-[#5d476e]">
-            In this example, the flex class is applied to the container to make
-            it a flex container. The justify-between class is used to distribute
+            In this example, the flex className is applied to the container to make
+            it a flex container. The justify-between className is used to distribute
             the items along the main axis with space between them. Each item has
-            a bg-gray-300 class for a gray background and a p-4 class for
-            padding. Adjust the classes as needed for your layout.
+            a bg-gray-300 className for a gray background and a p-4 className for
+            padding. Adjust the classNamees as needed for your layout.
           </p>
           <div className="flex flex-row mt-4 font-bold text-lg text-[#2d163f] justify-between">
             <div>$240</div>

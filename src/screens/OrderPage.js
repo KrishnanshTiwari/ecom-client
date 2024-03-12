@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Button1 from "../components/Button1";
+import React from "react";
 
-const products = [
+const productHistory = [
   {
     id: 1,
     product: [
@@ -61,14 +59,13 @@ const products = [
 ];
 
 function OrderPage() {
-  const [productHistory, setProductHistory] = useState(products);
 
   return (
     <>
       <div className="min-h-[60vh] mx-auto mt-12 pt-6 max-w-7xl px-8 sm:px-12 lg:px-16 my-6">
         <div className="flex flex-col">
           {productHistory.map((product) => (
-            <div className="bg-white py-6 sm:px-8 px-4 mb-4 shadow-sm flex sm:flex-row flex-col">
+            <div key = {product.id} className="bg-white py-6 sm:px-8 px-4 mb-4 shadow-sm flex sm:flex-row flex-col">
               <div className="flex flex-col mr-3  sm:w-[30%]">
                 <div className="text-2xl font-bold">{product.date}</div>
                 <div className="text-sm font-semibold text-gray-600">

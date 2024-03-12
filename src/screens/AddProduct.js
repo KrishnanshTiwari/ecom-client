@@ -48,7 +48,7 @@ function AddProduct() {
               />
             </div>
           </div>
-          <div class="mb-4">
+          <div className="mb-4">
             <div className="flex items-center justify-between">
               <label
                 htmlFor="price"
@@ -63,11 +63,11 @@ function AddProduct() {
                 id="image"
                 name="image"
                 accept="image/*"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:purple-indigo-500 sm:text-sm "
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:purple-indigo-500 sm:text-sm "
               />
             </div>
           </div>
-          <div class="mb-4">
+          <div className="mb-4">
             <div className="flex items-center justify-between">
               <label
                 htmlFor="description"
@@ -85,7 +85,7 @@ function AddProduct() {
               ></textarea>
             </div>
           </div>
-          <div class="mb-4">
+          <div className="mb-4">
             <div className="flex items-center justify-between">
               <label
                 htmlFor="category"
@@ -107,7 +107,7 @@ function AddProduct() {
               </select>
             </div>
           </div>
-          <div class="flex justify-end">
+          <div className="flex justify-end">
             <Button1 data="Submit" />
           </div>
         </form>

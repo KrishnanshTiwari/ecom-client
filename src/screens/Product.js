@@ -9,7 +9,6 @@ import {
   FunnelIcon,
   MinusIcon,
   PlusIcon,
-  Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 
 const sortOptions = [
@@ -46,8 +45,8 @@ const filters = [
   },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+function classNames(...classNamees) {
+  return classNamees.filter(Boolean).join(" ");
 }
 
 const products = [
@@ -293,7 +292,7 @@ export default function Product() {
               <div className="lg:col-span-3">
                 <div className="flex flex-wrap pb-8 justify-around">
                   {products.map((product) => (
-                    <ProductCard data={product} />
+                    <ProductCard key={product.id} data={product} />
                   ))}
                 </div>
               </div>
