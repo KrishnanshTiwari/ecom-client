@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
 import Button1 from "../components/Button1";
 const products = [
@@ -29,15 +29,44 @@ const products = [
   // More products...
 ];
 function ProductDashboard() {
+  const [deatails, setDetails] = useState([]);
+  const fetchData = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(
+        "http://localhost:8000/seller/sellerproductlist",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            sessionToken: token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setDetails(data);
+        console.log(data);
+      } else {
+        alert("something went wrong...");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
       <div className="min-h-[60vh] mx-auto mt-12 max-w-7xl px-8 sm:px-12 lg:px-16 my-6">
         <ul>
-          {products.map((product) => (
+          {deatails.map((product) => (
             <li key={product.id} className="flex py-6">
               <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                 <img
-                  src={product.imageSrc}
+                  src={product.image}
                   alt={product.imageAlt}
                   className="h-full w-full object-cover object-center"
                 />
@@ -47,7 +76,7 @@ function ProductDashboard() {
                 <div>
                   <div className="flex justify-between text-base font-medium text-[#2d163f]">
                     <h3>
-                      <a href={product.href}>{product.name}</a>
+                      <a href={product.href}>{product.title}</a>
                     </h3>
                     <p className="ml-4">{product.price}</p>
                   </div>

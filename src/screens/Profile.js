@@ -23,7 +23,7 @@ export default function Profile() {
         setDetails(data);
         //console.log(data);
       } else {
-        alert("something went wrong...please check credential");
+        alert("something went wrong...");
       }
     } catch (error) {
       console.error("Error during registration:", error);
