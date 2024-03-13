@@ -1,4 +1,5 @@
 import React from "react";
+import { useAuth } from "../AuthContext";
 import { Disclosure, Menu } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -6,7 +7,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import logo from "../assets/logo.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
@@ -19,6 +20,8 @@ function classNames(...classNamees) {
 }
 
 function NavBar({ children }) {
+  const navigate = useNavigate();
+  const { isLoggedIn, logout } = useAuth();
   const location = useLocation();
   const navigation = [
     { name: "Home", to: "/", current: location.pathname === "/" },
@@ -29,11 +32,6 @@ function NavBar({ children }) {
     },
   ];
 
-  const userNavigation = [
-    { name: "Your Profile", to: "/profile" },
-    { name: "Become a Seller", to: "/become-seller" },
-    { name: "Sign out", to: "/login" },
-  ];
   return (
     <>
       <Disclosure as="nav" className="bg-[#362744]">
@@ -91,21 +89,49 @@ function NavBar({ children }) {
                         </Menu.Button>
                       </div>
                       <Menu.Items className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1">
-                        {userNavigation.map((item) => (
-                          <Menu.Item key={item.name}>
-                            {({ active }) => (
-                              <Link
-                                to={item.to}
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-[#2d163f]"
-                                )}
-                              >
-                                {item.name}
-                              </Link>
-                            )}
-                          </Menu.Item>
-                        ))}
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/profile"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-[#2d163f]"
+                              )}
+                            >
+                              Your Profile
+                            </Link>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/become-seller"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-[#2d163f]"
+                              )}
+                            >
+                              Become Seller
+                            </Link>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/login"
+                              onClick={() => {
+                                logout();
+                                navigate("/login");
+                              }}
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-[#2d163f]"
+                              )}
+                            >
+                              log-out
+                            </Link>
+                          )}
+                        </Menu.Item>
                       </Menu.Items>
                     </Menu>
                   </div>
@@ -163,15 +189,40 @@ function NavBar({ children }) {
                   </Link>
                 </div>
                 <div className="mt-3 space-y-1 px-2">
-                  {userNavigation.map((item) => (
-                    <Disclosure.Button
-                      key={item.name}
-                      as="a"
-                      className="block rounded-md px-3 py-2 text-base font-medium text-[#e8c2d3] hover:bg-gray-700"
+                  <Disclosure.Button
+                    as="a"
+                    className="block rounded-md px-3 py-2 text-base font-medium text-[#e8c2d3] hover:bg-gray-700"
+                  >
+                    <Link
+                      to="/profile"
                     >
-                      <Link to={item.to}>{item.name}</Link>
-                    </Disclosure.Button>
-                  ))}
+                      Your Profile
+                    </Link>
+                  </Disclosure.Button>
+                  <Disclosure.Button
+                    as="a"
+                    className="block rounded-md px-3 py-2 text-base font-medium text-[#e8c2d3] hover:bg-gray-700"
+                  >
+                    <Link
+                      to="/become-seller"
+                    >
+                      Become Seller
+                    </Link>
+                  </Disclosure.Button>
+                  <Disclosure.Button
+                    as="a"
+                    className="block rounded-md px-3 py-2 text-base font-medium text-[#e8c2d3] hover:bg-gray-700"
+                  >
+                    <Link
+                      to="/login"
+                      onClick={() => {
+                        logout();
+                        navigate("/login");
+                      }}
+                    >
+                      log-out
+                    </Link>
+                  </Disclosure.Button>
                 </div>
               </div>
             </Disclosure.Panel>

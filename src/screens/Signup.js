@@ -1,8 +1,37 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button1 from "../components/Button1";
 
 export default function Signup() {
+  const [username, setusername] = useState(""); 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const navigate = useNavigate();
+  const handleRegister = async(e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("https://ecommerce-backend-w0k9.onrender.com/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password, phone }),
+      });
+
+      if (response.ok) {
+        //console.log(response);
+        alert("Registered successfully and now you can login your id");
+        navigate("/login");
+      }else {
+        alert("something went wrong...please check credential");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  };
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -26,6 +55,8 @@ export default function Signup() {
                   type="name"
                   autoComplete="name"
                   required
+                  value = {username}
+                  onChange={(e) => setusername(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-[#2d163f] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-800 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -45,6 +76,8 @@ export default function Signup() {
                   type="email"
                   autoComplete="email"
                   required
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-[#2d163f] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-800 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -64,6 +97,8 @@ export default function Signup() {
                   type="phone"
                   autoComplete="phone"
                   required
+                  value={phone}
+                  onChange={(e)=>setPhone(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-[#2d163f] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-800 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -85,13 +120,15 @@ export default function Signup() {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={password}
+                  onChange={(e)=>setPassword(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-[#2d163f] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-800 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
 
             <div>
-              <Button1 data= "Sign Up" />
+              <Button1 type="submit" onClick={handleRegister} data= "Sign Up" />
             </div>
           </form>
 
