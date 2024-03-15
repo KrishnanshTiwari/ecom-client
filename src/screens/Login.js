@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import Button1 from "../components/Button1";
+import Loader from '../components/Loader'
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { login, setUser, setSeller } = useAuth();
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -39,6 +41,7 @@ export default function Login() {
         login();
         localStorage.setItem("token", data.sessionToken);
         localStorage.setItem("userId", data._id);
+        setLoading(false);
         alert("Logged in successfully");
         navigate("/");
       } else {

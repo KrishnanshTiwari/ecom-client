@@ -4,10 +4,10 @@ import {getStorage} from "firebase/storage";
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
-    projectId: "ecom-a2878",
-    storageBucket: "ecom-a2878.appspot.com",
-    messagingSenderId: "224405286537",
-    appId: "1:224405286537:web:0b90f164a9c6029e1be058"
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.API_ID
   };
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);

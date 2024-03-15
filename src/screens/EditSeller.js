@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import Button1 from '../components/Button1'
+import Loader from '../components/Loader'
 export default function EditSeller() {
   const [gst, setGst] = useState("");
   const [bank, setBank] = useState("");
   const [ifsc, setIfsc] = useState("");
   const [account, setAccount] = useState("");
+  const [loading, setLoading] = useState(true);
   const { setSeller } = useAuth();
   const navigate = useNavigate();
 
@@ -29,15 +31,20 @@ export default function EditSeller() {
       if (response.ok) {
         const data = await response.json();
         //console.log(data);
+        setLoading(false);
+        alert("Updated Successfully");
         navigate("/")
       } else {
-        alert("something went wrong...please check credential");
+        alert("something went wrong");
       }
     } catch (error) {
       console.error("Error during Updation:", error);
     }
   };
   return (
+    <>
+    {loading && <Loader />}
+    {!loading && (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-[#2d163f]">
         Fill You Updated Detail
@@ -132,12 +139,13 @@ export default function EditSeller() {
               />
             </div>
           </div>
-
           <div>
             <Button1 type="submit" onClick={EditDetails} data="Update Details" />
           </div>
         </form>
       </div>
     </div>
+    )}
+    </>
   )
 }

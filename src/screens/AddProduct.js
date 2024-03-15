@@ -8,59 +8,59 @@ function AddProduct() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setimage] = useState("");
+  const [image, setImage] = useState(null);
   const [category, setCategory] = useState("");
   const navigate = useNavigate();
 
   const handleuploadimage = async (e) => {
-    const imageRef = ref(storage, title);
-    if (e) {
-      uploadBytes(imageRef, e)
-        .then(() => {
-          getDownloadURL(imageRef)
-            .then((url) => {
-              setimage(url);
-              alert("Image Uploaded");
-            })
-            .catch((error) => {
-              console.log(error.message, "error geting the image url");
-            });
-          setimage(null);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    }
+    setImage(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
-    //setPrice(parseInt(price));
-    try {
-      const response = await fetch(
-        `http://localhost:8000/seller/addtoproducts`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            sessionToken: token,
-          },
-          body: JSON.stringify({ title, price, image, description, category }),
-        }
-      );
-
-      if (response.ok) {
-        console.log(image);
-        alert("Added successfully");
-        navigate("/");
-      } else {
-        alert("Something wents wrong");
-      }
-    } catch (error) {
-      console.error("Error during profile update:", error);
+    if (!image) {
+      alert("Please select an image");
+      return;
     }
+
+    const imageRef = ref(storage, title);
+    uploadBytes(imageRef, image)
+      .then(() => {
+        getDownloadURL(imageRef)
+          .then((url) => {
+            const imageUrl = url;
+            const token = localStorage.getItem("token");
+            fetch("https://ecommerce-backend-w0k9.onrender.com/seller/addtoproducts", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                sessionToken: token,
+              },
+              body: JSON.stringify({ title, price, image : imageUrl, description, category }),
+            })
+              .then((response) => {
+                if (response.ok) {
+                  console.log(imageUrl);
+                  alert("Added successfully");
+                  navigate("/");
+                } else {
+                  alert("Something went wrong");
+                }
+              })
+              .catch((error) => {
+                console.error("Error during profile update:", error);
+                alert("Something went wrong");
+              });
+          })
+          .catch((error) => {
+            console.log(error.message, "error getting the image URL");
+          });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
+
 
   return (
     <>
@@ -128,9 +128,7 @@ function AddProduct() {
                 id="image"
                 name="image"
                 accept="image/*"
-                onChange={(e) => {
-                  handleuploadimage(e.target.files[0]);
-                }}
+                onChange={(e) => setImage(e.target.files[0])}
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:purple-indigo-500 sm:text-sm "
               />
             </div>

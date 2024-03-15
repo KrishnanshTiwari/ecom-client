@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext";
 import { Link } from "react-router-dom";
 import Button1 from "../components/Button1";
+import Loader from "../components/Loader";
 export default function Profile() {
   const [deatails, setDetails] = useState();
+  const [loading, setLoading] = useState(true);
   const fetchProfile = async () => {
     const token = localStorage.getItem("token");
     try {
@@ -21,18 +23,22 @@ export default function Profile() {
       if (response.ok) {
         const data = await response.json();
         setDetails(data);
+        setLoading(false);
         //console.log(data);
       } else {
         alert("something went wrong...");
       }
     } catch (error) {
-      console.error("Error during registration:", error);
+      console.error("Error during Profile fetch:", error);
     }
   };
   useEffect(() => {
     fetchProfile();
   }, []);
   return (
+    <>
+    {loading && <Loader />}
+    {!loading ? (
     <div className="min-h-[60vh] flex justify-center items-center py-6">
       <div className="w-4/5">
         <div className="text-3xl md:text-5xl font-bold text-[#2d163f] mb-3">
@@ -132,5 +138,9 @@ export default function Profile() {
         )}
       </div>
     </div>
+     ) :
+     <div className="min-h-[60vh]"></div>
+    }
+    </>
   );
 }

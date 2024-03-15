@@ -1,37 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Button1 from "../components/Button1";
-const products = [
-  {
-    id: 1,
-    name: "Throwback Hip Bag",
-    href: "#",
-    color: "Salmon",
-    price: "$90.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-    imageAlt:
-      "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-  },
-  {
-    id: 2,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-  // More products...
-];
+import Loader from "../components/Loader";
+
 function ProductDashboard() {
-  const [deatails, setDetails] = useState([]);
+  const [details, setDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token");
+
   const fetchData = async () => {
-    const token = localStorage.getItem("token");
     try {
       const response = await fetch(
         "http://localhost:8000/seller/sellerproductlist",
@@ -47,22 +24,53 @@ function ProductDashboard() {
       if (response.ok) {
         const data = await response.json();
         setDetails(data);
-        console.log(data);
+        setLoading(false);
+        //console.log(data);
       } else {
         alert("something went wrong...");
       }
     } catch (error) {
-      console.error("Error during registration:", error);
+      console.error("Error during products loading:", error);
     }
   };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(
+        `https://ecommerce-backend-w0k9.onrender.com/seller/deleteproduct/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            sessionToken: token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const updatedDetails = details.filter(product => product._id !== id);
+        setDetails(updatedDetails);
+        console.log("Product deleted successfully.");
+      } else {
+        alert("something went wrong...");
+      }
+    } catch (error) {
+      console.error("Error during products loading:", error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <>
+    {loading && <Loader />}
+    {!loading ? (
+      <>
       <div className="min-h-[60vh] mx-auto mt-12 max-w-7xl px-8 sm:px-12 lg:px-16 my-6">
         <ul>
-          {deatails.map((product) => (
+          {details.map((product) => (
             <li key={product.id} className="flex py-6">
               <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                 <img
@@ -78,12 +86,12 @@ function ProductDashboard() {
                     <h3>
                       <a href={product.href}>{product.title}</a>
                     </h3>
-                    <p className="ml-4">{product.price}</p>
+                    <p className="ml-4">Rs. {product.price}</p>
                   </div>
                   <p className="mt-1 text-sm text-[#5d476e]">{product.color}</p>
                   <div>
                     <span className="text-yellow-500">★</span>
-                    <span className="text-sm text-gray-700 ml-1">4.5</span>
+                    <span className="text-sm text-gray-700 ml-1">{product.rating}</span>
                   </div>
                 </div>
                 <div className="flex flex-1 items-end justify-between text-sm">
@@ -91,8 +99,9 @@ function ProductDashboard() {
                     <button
                       type="button"
                       className="font-medium text-purple-600 hover:text-purple-500"
+                      onClick={() => handleDelete(product._id)}
                     >
-                      Remove
+                      Delete
                     </button>
                   </div>
                 </div>
@@ -102,9 +111,13 @@ function ProductDashboard() {
         </ul>
       </div>
       <div className="flex flex-row justify-between mt-5 mb-7 px-12 sm:px-16 lg:px-20">
-        <Link to = '/seller-order'><Button1 data = "Browse orders" /></Link>
-        <Link to = '/add-product'><Button1 data = "Add Product" /></Link>
+        <Link to="/seller-order"><Button1 data="Browse orders" /></Link>
+        <Link to="/add-product"><Button1 data="Add Product" /></Link>
       </div>
+      </>
+      ) :
+     <div className="min-h-[60vh]"></div>
+    }
     </>
   );
 }

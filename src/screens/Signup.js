@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button1 from "../components/Button1";
+import Loader from '../components/Loader'
 
 export default function Signup() {
   const [username, setusername] = useState(""); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const handleRegister = async(e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ export default function Signup() {
 
       if (response.ok) {
         //console.log(response);
+        setLoading(false);
         alert("Registered successfully and now you can login your id");
         navigate("/login");
       }else {
@@ -34,6 +37,8 @@ export default function Signup() {
 
   return (
     <>
+    {loading && <Loader />}
+    {!loading && (
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#2d163f]">
           Create a New account
@@ -143,6 +148,7 @@ export default function Signup() {
           </p>
         </div>
       </div>
+    )}
     </>
   );
 }
