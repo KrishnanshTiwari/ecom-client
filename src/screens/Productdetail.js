@@ -1,46 +1,113 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Loader from "../components/Loader";
+import { useParams } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 import Button1 from "../components/Button1";
 import { Link } from "react-router-dom";
 function Productdetail() {
+  const { isLoggedIn } = useAuth();
+  const { id } = useParams();
+  const [detail, setDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token");
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/productdetail/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setDetail(data);
+        setLoading(false);
+        //console.log(data);
+      } else {
+        alert("something went wrong...");
+      }
+    } catch (error) {
+      console.error("Error during products loading:", error);
+    }
+  };
+
+  const handleAddToCart = async () => {
+    try {
+      //setLoading(true);
+      const response = await fetch(
+        `http://localhost:8000/user/addtocart/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            sessionToken: token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        //setDetail(data);
+        //setLoading(false);
+        //console.log(data);
+      } else {
+        //setLoading(false);
+        alert("something went wrong...");
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error("Error during products loading:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
-      <div className="relative flex flex-col sm:flex-row w-[90%] mx-auto my-5 px-4 min-h-[60vh]">
-        <div className="sm:h-[40%] sm:w-[40%] w-full h-full flex-shrink-0 overflow-hidden rounded-md border border-gray-200 flex flex-col">
-          <h1 className="text-3xl text-center mt-5 font-bold tracking-tight text-[#2d163f] mb-4">
-            Leather Bag
-          </h1>
-          <img
-            src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg"
-            alt="img"
-            className="h-[80%] w-[80%] object-cover object-center mx-auto"
-          />
-        </div>
-        <div className="flex flex-col p-5">
-          <p className="text-justify text-sm font-semibold text-[#5d476e]">
-            In this example, the flex className is applied to the container to make
-            it a flex container. The justify-between className is used to distribute
-            the items along the main axis with space between them. Each item has
-            a bg-gray-300 className for a gray background and a p-4 className for
-            padding. Adjust the classNamees as needed for your layout.
-          </p>
-          <div className="flex flex-row mt-4 font-bold text-lg text-[#2d163f] justify-between">
-            <div>$240</div>
-            <div>Bags</div>
+      {loading && <Loader />}
+      {!loading ? (
+        <div className="relative flex flex-col sm:flex-row w-[90%] mx-auto my-5 px-4 min-h-[60vh]">
+          <div className="sm:h-[40%] sm:w-[40%] w-full h-full flex-shrink-0 overflow-hidden rounded-md border border-gray-200 flex flex-col">
+            <h1 className="text-3xl text-center mt-5 font-bold tracking-tight text-[#2d163f] mb-4">
+              {detail.title}
+            </h1>
+            <img
+              src={detail.image}
+              alt="img"
+              className="h-[80%] w-[80%] object-cover object-center mx-auto"
+            />
           </div>
-          <div className="mt-4 font-semibold text-[#2d163f]">
-            <h3>Seller : Shukla Abhishek</h3>
+          <div className="flex flex-col sm:w-[60%] p-5">
+            <p className="text-justify text-sm font-semibold text-[#5d476e]">
+              {detail.description}
+            </p>
+            <div className="flex flex-row mt-4 font-bold text-lg text-[#2d163f] justify-between">
+              <div>Rs. {detail.price}</div>
+              <div>{detail.category}</div>
+            </div>
+            <div className="mt-4 font-semibold text-[#2d163f]">
+              <h3>Seller : {detail.sellerName}</h3>
               <div className="text-sm text-[#2d163f]">
                 Rating : <span className="text-yellow-500">★</span>
-                <span className="text-sm text-gray-700">4.5</span>
+                <span className="text-sm text-gray-700">{detail.rating}</span>
               </div>
-          </div>
-          <div className="absolute -bottom-1 right-1">
-            <Link to="/">
-              <Button1 data="Add to Cart" />
-            </Link>
+            </div>
+            {isLoggedIn && (
+              <div className="absolute -bottom-1 right-1">
+                <Button1 onClick={() => handleAddToCart()} data="Add to Cart" />
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="min-h-[60vh]"></div>
+      )}
     </>
   );
 }

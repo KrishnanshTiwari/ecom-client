@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button1 from "../components/Button1";
 import Loader from "../components/Loader";
 
 function ProductDashboard() {
+  const navigate = useNavigate();
   const [details, setDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
@@ -11,7 +12,7 @@ function ProductDashboard() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/seller/sellerproductlist",
+        "https://ecommerce-backend-w0k9.onrender.com/seller/sellerproductlist",
         {
           method: "GET",
           headers: {
@@ -36,6 +37,7 @@ function ProductDashboard() {
 
   const handleDelete = async (id) => {
     try {
+      setLoading(true);
       const response = await fetch(
         `https://ecommerce-backend-w0k9.onrender.com/seller/deleteproduct/${id}`,
         {
@@ -50,6 +52,7 @@ function ProductDashboard() {
       if (response.ok) {
         const updatedDetails = details.filter(product => product._id !== id);
         setDetails(updatedDetails);
+        setLoading(false);
         console.log("Product deleted successfully.");
       } else {
         alert("something went wrong...");
@@ -71,7 +74,7 @@ function ProductDashboard() {
       <div className="min-h-[60vh] mx-auto mt-12 max-w-7xl px-8 sm:px-12 lg:px-16 my-6">
         <ul>
           {details.map((product) => (
-            <li key={product.id} className="flex py-6">
+            <li key={product._id} className="flex py-6">
               <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                 <img
                   src={product.image}
@@ -84,7 +87,7 @@ function ProductDashboard() {
                 <div>
                   <div className="flex justify-between text-base font-medium text-[#2d163f]">
                     <h3>
-                      <a href={product.href}>{product.title}</a>
+                      <button onClick={() => navigate(`/product-detail/${product._id}`)}>{product.title}</button>
                     </h3>
                     <p className="ml-4">Rs. {product.price}</p>
                   </div>
