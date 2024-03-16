@@ -1,81 +1,62 @@
-import React from "react";
-
-const productHistory = [
-  {
-    id: 1,
-    product: [
-      {
-        id: 1,
-        Name: "Shirt",
-        price: "1000",
-        quantity: "1",
-      },
-      {
-        id: 2,
-        Name: "pant",
-        price: "1500",
-        quantity: "1",
-      },
-      {
-        id: 3,
-        Name: "Shoes",
-        price: "1800",
-        quantity: "1",
-      },
-    ],
-    date: "2024-03-09T15:30:45",
-    total : "4300",
-    cost: "3465",
-    payment: "COD",
-  },
-  {
-    id: 2,
-    product: [
-      {
-        id: 1,
-        Name: "Kurta",
-        price: "1000",
-        quantity: "1",
-      },
-      {
-        id: 2,
-        Name: "Jeans",
-        price: "1500",
-        quantity: "1",
-      },
-      {
-        id: 3,
-        Name: "Shoes",
-        price: "1800",
-        quantity: "1",
-      },
-    ],
-    date: "2024-04-09T15:30:45",
-    total : "4300",
-    cost: "3465",
-    payment: "COD",
-  },
-  // More products...
-];
+import React, { useState, useEffect } from "react";
+import Button1 from "../components/Button1";
+import Loader from "../components/Loader";
+import { Link } from "react-router-dom";
 
 function OrderPage() {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token");
+
+  const fetchOrders = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8000/user/getorders",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            sessionToken: token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setOrders(data);
+        setLoading(false);
+        //console.log(data);
+      } else {
+        alert("something went wrong...");
+      }
+    } catch (error) {
+      console.error("Error during products loading:", error);
+    }
+  };
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
   return (
     <>
+    {loading && <Loader />}
+    {!loading ? (
+        <>
+        {(orders.length!==0) ? (
       <div className="min-h-[60vh] mx-auto mt-12 pt-6 max-w-7xl px-8 sm:px-12 lg:px-16 my-6">
         <div className="flex flex-col">
-          {productHistory.map((product) => (
+          {orders.map((product) => (
             <div key = {product.id} className="bg-white py-6 sm:px-8 px-4 mb-4 shadow-sm flex sm:flex-row flex-col">
               <div className="flex flex-col mr-3  sm:w-[30%]">
                 <div className="text-2xl font-bold">{product.date}</div>
                 <div className="text-sm font-semibold text-gray-600">
-                  Payment mode : {product.payment}
+                  Payment mode : Rs. {product.payment}
                 </div>
                 <div className="text-sm font-semibold text-gray-600">
-                  Total Amount : {product.total}
+                  Total Amount : Rs. {product.total}
                 </div>
                 <div className="text-sm font-semibold text-gray-600">
-                  Net Payable Amount : {product.cost}
+                  Net Payable Amount : Rs. {product.cost}
                 </div>
                 <div className="text-sm text-red-500">
                   (After discount and Platform fees)
@@ -87,14 +68,14 @@ function OrderPage() {
                 <div className="col-span-1 font-bold">Quantity</div>
                 <div className="col-span-1 font-bold">Total</div>
                 <div className="col-span-1 font-bold"></div>{" "}
-                {product.product.map((item) => (
+                {product.products.map((item) => (
                   <React.Fragment key={item.id}>
-                    <div className="col-span-1">{item.Name}</div>
-                    <div className="col-span-1">{item.price}</div>
+                    <div className="col-span-1">{item.name}</div>
+                    <div className="col-span-1">Rs {item.price}</div>
                     <div className="col-span-1">{item.quantity}</div>
-                    <div className="col-span-1">
+                    <div className="col-span-1">Rs. 
                       {(
-                        parseFloat(item.price.replace("$", "")) * item.quantity
+                        parseFloat(item.price) * item.quantity
                       ).toFixed(2)}
                     </div>
                     <div className="col-span-1"></div>{" "}
@@ -105,6 +86,16 @@ function OrderPage() {
           ))}
         </div>
       </div>
+      ) : (
+        <div className="min-h-[60vh] flex justify-center items-center text-red-500">
+          No orders available
+        </div>
+      )}
+    </>
+    )
+      : (
+        <div className="min-h-[60vh]"></div>
+      )}
     </>
   );
 }
