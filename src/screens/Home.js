@@ -9,43 +9,46 @@ import poster from "../assets/poster.png";
 const products = [
   {
     id: 1,
-    name: "Basic Tee shirt is herehegfwyugfuergeu",
+    title: "Basic T shirt",
     href: "#",
-    imageSrc:
+    image:
       "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
     price: "$35",
-    color: "Black",
+    category: "Black",
+    rating : "4.5"
   },
   {
     id: 2,
-    name: "Basic Tee",
+    title: "Basic Tee",
     href: "#",
-    imageSrc:
+    image:
       "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
     imageAlt: "Front of men's Basic Tee in black.",
     price: "$35",
-    color: "Black",
+    category: "Black",
+    rating : "4.5"
   },
   {
     id: 3,
-    name: "Basic Tee",
+    title: "Basic Tee",
     href: "#",
-    imageSrc:
+    image:
       "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
     imageAlt: "Front of men's Basic Tee in black.",
     price: "$35",
-    color: "Black",
+    category: "Black",
+    rating : "4.5"
   },
   {
     id: 4,
-    name: "Basic Tee",
+    title: "Basic Tee",
     href: "#",
-    imageSrc:
+    image:
       "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
     imageAlt: "Front of men's Basic Tee in black.",
     price: "$35",
-    color: "Black",
+    category: "Black",
+    rating : "4.5"
   },
 ];
 function Home() {
@@ -103,7 +106,9 @@ function Home() {
           {/* This is our products list  */}
 
           {products.map((product) => (
+            <div className="w-[40%] sm:w-1/5">
             <ProductCard key={product.id} data={product} />
+            </div>
           ))}
         </div>
       </div>
@@ -117,7 +122,9 @@ function Home() {
           {/* This is our products list  */}
 
           {products.map((product) => (
+             <div className="w-[40%] sm:w-1/5">
             <ProductCard key={product.id} data={product} />
+            </div>
           ))}
         </div>
       </div>
