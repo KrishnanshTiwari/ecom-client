@@ -11,11 +11,6 @@ import {
   PlusIcon,
 } from "@heroicons/react/20/solid";
 
-
-
-
-
-
 function classNames(...classNames) {
   return classNames.filter(Boolean).join(" ");
 }
