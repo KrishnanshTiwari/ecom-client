@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+import { useAuth } from './AuthContext';
 import Home from './screens/Home';
 import Product from './screens/Product';
 import Navbar from './components/Navbar';
@@ -18,7 +19,10 @@ import EditSeller from './screens/EditSeller';
 import Checkout from './screens/Checkout';
 import SellerOrder from './screens/SellerOrder';
 import OrderPage from './screens/OrderPage' ;
+
 function App() {
+  const { isLoggedIn, isSeller } = useAuth();
+
   return (
     <Router>
       <div className="App">
@@ -26,18 +30,34 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/product-detail/:id" element={<Productdetail />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/become-seller" element={<BecomeSeller/>} />
-          <Route path="/add-product" element={<AddProduct/>} />
-          <Route path="/product-dashboard" element={<ProductDashboard/>} />
-          <Route path="/edit-seller" element={<EditSeller/>} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/seller-order" element={<SellerOrder/>} />
-          <Route path="/order-page" element={<OrderPage/>} />
+
+          {isLoggedIn && (
+            <>
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/order-page" element={<OrderPage />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/become-seller" element={<BecomeSeller />} />
+            </>
+          )}
+
+          {!isLoggedIn && (
+            <>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </>
+          )}
+
+          {isSeller && (
+            <>
+              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/product-dashboard" element={<ProductDashboard />} />
+              <Route path="/edit-seller" element={<EditSeller />} />
+              <Route path="/seller-order" element={<SellerOrder />} />
+            </>
+          )}
+
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
@@ -45,5 +65,6 @@ function App() {
     </Router>
   );
 }
+
 
 export default App;
