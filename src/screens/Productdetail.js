@@ -52,6 +52,7 @@ function Productdetail() {
 
       if (response.ok) {
         const data = await response.json();
+        alert("Added to cart");
         //setDetail(data);
         //setLoading(false);
         //console.log(data);

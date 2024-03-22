@@ -8,12 +8,13 @@ export default function EditSeller() {
   const [bank, setBank] = useState("");
   const [ifsc, setIfsc] = useState("");
   const [account, setAccount] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { setSeller } = useAuth();
   const navigate = useNavigate();
 
   const EditDetails = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
@@ -44,7 +45,6 @@ export default function EditSeller() {
   return (
     <>
     {loading && <Loader />}
-    {!loading && (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-[#2d163f]">
         Fill You Updated Detail
@@ -145,7 +145,6 @@ export default function EditSeller() {
         </form>
       </div>
     </div>
-    )}
     </>
   )
 }

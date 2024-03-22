@@ -9,12 +9,12 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { login, setUser, setSeller } = useAuth();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -54,6 +54,7 @@ export default function Login() {
 
   return (
     <>
+      {loading && <Loader />}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#2d163f]">
           Login to Your account

@@ -8,11 +8,11 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleRegister = async(e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await fetch("https://ecommerce-backend-w0k9.onrender.com/auth/register", {
         method: "POST",
@@ -38,7 +38,6 @@ export default function Signup() {
   return (
     <>
     {loading && <Loader />}
-    {!loading && (
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#2d163f]">
           Create a New account
@@ -148,7 +147,6 @@ export default function Signup() {
           </p>
         </div>
       </div>
-    )}
     </>
   );
 }

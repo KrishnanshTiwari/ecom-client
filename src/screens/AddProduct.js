@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { storage } from "../services/firebase.config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Button1 from "../components/Button1";
+import Loader from "../components/Loader";
 
 function AddProduct() {
+  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -18,6 +20,7 @@ function AddProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (!image) {
       alert("Please select an image");
       return;
@@ -30,18 +33,28 @@ function AddProduct() {
           .then((url) => {
             const imageUrl = url;
             const token = localStorage.getItem("token");
-            fetch("https://ecommerce-backend-w0k9.onrender.com/seller/addtoproducts", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                sessionToken: token,
-              },
-              body: JSON.stringify({ title, price, image : imageUrl, description, category }),
-            })
+            fetch(
+              "https://ecommerce-backend-w0k9.onrender.com/seller/addtoproducts",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  sessionToken: token,
+                },
+                body: JSON.stringify({
+                  title,
+                  price,
+                  image: imageUrl,
+                  description,
+                  category,
+                }),
+              }
+            )
               .then((response) => {
                 if (response.ok) {
                   console.log(imageUrl);
                   alert("Added successfully");
+                  setLoading(false);
                   navigate("/");
                 } else {
                   alert("Something went wrong");
@@ -61,9 +74,9 @@ function AddProduct() {
       });
   };
 
-
   return (
     <>
+      {loading && <Loader />}
       <div className="min-h-[60vh] w-4/5 sm:w-2/5 mx-auto py-7">
         <h1 className="text-4xl font-bold tracking-tight text-[#2d163f] mb-4">
           Add Product
