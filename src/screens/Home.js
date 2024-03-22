@@ -15,7 +15,7 @@ const products = [
       "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: "$35",
     category: "Black",
-    rating : "4.5"
+    rating: "4.5",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const products = [
     imageAlt: "Front of men's Basic Tee in black.",
     price: "$35",
     category: "Black",
-    rating : "4.5"
+    rating: "4.5",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const products = [
     imageAlt: "Front of men's Basic Tee in black.",
     price: "$35",
     category: "Black",
-    rating : "4.5"
+    rating: "4.5",
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const products = [
     imageAlt: "Front of men's Basic Tee in black.",
     price: "$35",
     category: "Black",
-    rating : "4.5"
+    rating: "4.5",
   },
 ];
 function Home() {
@@ -73,7 +73,10 @@ function Home() {
             <p className="text-lg md:text-xl mt-4 mb-8">
               Where Quality Meets Convenience
             </p>
-            <Link to = '/product' className="bg-transparent text-white px-6 py-3 rounded-full uppercase font-semibold border-2 border-white backdrop-filter backdrop-blur-lg">
+            <Link
+              to="/product"
+              className="bg-transparent text-white px-6 py-3 rounded-full uppercase font-semibold border-2 border-white backdrop-filter backdrop-blur-lg"
+            >
               Shop Now
             </Link>
           </div>
@@ -81,19 +84,18 @@ function Home() {
       </div>
       <div className="bg-white shadow-xl mx-auto w-[90%] md:w-3/4 my-8 rounded-2xl">
         <div className="max-w-7xl px-3 py-2 flex justify-between font-bold mx-5">
-            <div>
-              <img src={adidas} alt="adidas"
-            className="w-4/5 md:w-[90%]" />
-            </div>
-            <div>
-              <img src={levis} alt="levis" className="w-4/5 md:w-[90%]" />
-            </div>
-            <div>
-              <img src={nike} alt="nike" className="w-4/5 md:w-[90%]" />
-            </div>
-            <div>
-              <img src={calvin} alt="calvin" className="w-4/5 md:w-[90%]" />
-            </div>
+          <div>
+            <img src={adidas} alt="adidas" className="w-4/5 md:w-[90%]" />
+          </div>
+          <div>
+            <img src={levis} alt="levis" className="w-4/5 md:w-[90%]" />
+          </div>
+          <div>
+            <img src={nike} alt="nike" className="w-4/5 md:w-[90%]" />
+          </div>
+          <div>
+            <img src={calvin} alt="calvin" className="w-4/5 md:w-[90%]" />
+          </div>
         </div>
       </div>
       <div className="bg-white shadow-xl mx-auto w-[95%] my-6 rounded-lg">
@@ -107,7 +109,7 @@ function Home() {
 
           {products.map((product) => (
             <div className="w-[40%] sm:w-1/5">
-            <ProductCard key={product.id} data={product} />
+              <ProductCard key={product.id} data={product} />
             </div>
           ))}
         </div>
@@ -122,8 +124,8 @@ function Home() {
           {/* This is our products list  */}
 
           {products.map((product) => (
-             <div className="w-[40%] sm:w-1/5">
-            <ProductCard key={product.id} data={product} />
+            <div className="w-[40%] sm:w-1/5">
+              <ProductCard key={product.id} data={product} />
             </div>
           ))}
         </div>
@@ -134,7 +136,6 @@ function Home() {
             <h1 className="text-2xl md:text-5xl font-bold leading-tight text-white">
               Discover the Latest Trends!
             </h1>
-            
           </div>
           <div className="w-[40%]">
             <img

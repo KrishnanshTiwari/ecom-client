@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-[#42314e] text-white pt-5">
@@ -14,13 +14,13 @@ const Footer = () => {
           <h2 className="text-lg font-bold mb-2">Quick Links</h2>
           <ul>
             <li>
-              <Link to='/'>Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to='/product'>Products</Link>
+              <Link to="/product">Products</Link>
             </li>
             <li>
-              <Link to='/contact'>Contact</Link>
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
         </div>

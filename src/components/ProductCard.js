@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 export default function ProductCard(props) {
   const navigate = useNavigate();
   const { _id, title, image, price, category, rating } = props.data;
@@ -7,7 +7,7 @@ export default function ProductCard(props) {
     <div
       key={_id}
       className="bg-[#ede0f7] cursor-pointer shadow-lg w-full text-white p-3 rounded transition-transform transform hover:scale-105"
-  onClick={() => navigate(`/product-detail/${_id}`)}
+      onClick={() => navigate(`/product-detail/${_id}`)}
     >
       <div>
         <img className="w-full" src={image} alt="img" />
@@ -24,7 +24,7 @@ export default function ProductCard(props) {
         <div className="flex justify-between">
           <p className="mt-1 text-sm text-gray-500">{category}</p>
           <div className="flex items-center">
-          <span className="text-yellow-500">★</span>
+            <span className="text-yellow-500">★</span>
             <span className="text-sm text-gray-700 ml-1">{rating}</span>
           </div>
         </div>

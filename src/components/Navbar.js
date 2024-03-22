@@ -15,7 +15,7 @@ function classNames(...classNamees) {
 
 function NavBar({ children }) {
   const navigate = useNavigate();
-  const { isLoggedIn, logout, user } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
   const location = useLocation();
   const navigation = [
     { name: "Home", to: "/", current: location.pathname === "/" },
@@ -215,7 +215,9 @@ function NavBar({ children }) {
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">
-                        {user.username}
+                        <Disclosure.Button className="block rounded-md px-3 py-2 text-base font-medium text-[#e8c2d3] hover:bg-gray-700">
+                          <Link to="/profile">Your Profile</Link>
+                        </Disclosure.Button>
                       </div>
                     </div>
                     <Link
@@ -229,9 +231,6 @@ function NavBar({ children }) {
                     </Link>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
-                    <Disclosure.Button className="block rounded-md px-3 py-2 text-base font-medium text-[#e8c2d3] hover:bg-gray-700">
-                      <Link to="/profile">Your Profile</Link>
-                    </Disclosure.Button>
                     <Disclosure.Button className="block rounded-md px-3 py-2 text-base font-medium text-[#e8c2d3] hover:bg-gray-700">
                       <Link to="/order-page">Your Order</Link>
                     </Disclosure.Button>

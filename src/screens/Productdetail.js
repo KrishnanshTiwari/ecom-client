@@ -3,7 +3,6 @@ import Loader from "../components/Loader";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import Button1 from "../components/Button1";
-import { Link } from "react-router-dom";
 function Productdetail() {
   const { isLoggedIn } = useAuth();
   const { id } = useParams();

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import Button1 from "../components/Button1";
-import Loader from '../components/Loader'
+import Loader from "../components/Loader";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { login, setUser, setSeller } = useAuth();
+  const { login } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -35,9 +35,9 @@ export default function Login() {
       if (response.ok) {
         const data = await response.json();
         //console.log(data);
-        const { username, email, phone, isSeller } = data;
-        setUser({ username, email, phone });
-        setSeller(isSeller);
+        //const { username, email, phone, isSeller } = data;
+        //setUser({ username, email, phone });
+        //setSeller(isSeller);
         login();
         localStorage.setItem("token", data.sessionToken);
         localStorage.setItem("userId", data._id);

@@ -35,7 +35,7 @@ const Cart = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  
+
   const removeItem = async (id) => {
     try {
       //setLoading(true);
@@ -72,7 +72,7 @@ const Cart = () => {
       {loading && <Loader />}
       {!loading ? (
         <>
-          {(cartItems.length!=0) ? (
+          {cartItems.length !== 0 ? (
             <div className="min-h-[60vh] mx-auto mt-12 pt-6 max-w-7xl px-8 sm:px-12 lg:px-16 my-6 relative border  pb-6 ">
               <div className="bg-white mb-6 px-3">
                 <ul>
