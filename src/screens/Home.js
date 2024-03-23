@@ -6,7 +6,7 @@ import adidas from "../assets/adidas.png";
 import calvin from "../assets/calvin-klein.png";
 import levis from "../assets/levis.png";
 import poster from "../assets/poster.png";
-import products from '../utils/constant';
+import products from "../utils/constant";
 function Home() {
   return (
     <div className="pb-6">
