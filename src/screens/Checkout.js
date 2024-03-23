@@ -37,23 +37,26 @@ const Checkout = () => {
         price: item.price,
         quantity: item.quantity,
       }));
-      const response = await fetch("https://ecommerce-backend-w0k9.onrender.com/user/addtoorders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          sessionToken: token,
-        },
-        body: JSON.stringify({
-          products,
-          total,
-          cost: netTotal,
-          payment: pay,
-          address,
-          city,
-          state,
-          zip
-        }),
-      });
+      const response = await fetch(
+        "https://ecommerce-backend-w0k9.onrender.com/user/addtoorders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            sessionToken: token,
+          },
+          body: JSON.stringify({
+            products,
+            total,
+            cost: netTotal,
+            payment: pay,
+            address,
+            city,
+            state,
+            zip,
+          }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -86,7 +89,7 @@ const Checkout = () => {
       document.body.appendChild(script);
     });
   };
-  
+
   const razorPay = async () => {
     //const res = await loadScript("https://pmny.in/yrz5HA0GJgxs")
     const res = await loadScript(
