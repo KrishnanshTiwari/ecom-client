@@ -9,17 +9,17 @@ export default function ProductCard(props) {
       className="bg-[#ede0f7] cursor-pointer shadow-lg w-full text-white p-3 rounded transition-transform transform hover:scale-105"
       onClick={() => navigate(`/product-detail/${_id}`)}
     >
-      <div>
-        <img className="w-full" src={image} alt="img" />
+      <div style={{ height: "200px" /* Set your desired height here */ }}>
+        <img className="w-full h-full object-cover" src={image} alt="img" />
       </div>
       <div className="sm:px-3 px-1.5 py-2">
         <div className="  flex justify-between">
           <div className="w-3/5 overflow-hidden">
             <h3 className="text-sm text-gray-700 whitespace-nowrap overflow-hidden overflow-ellipsis">
-              {title}
+              {title.length > 20 ? `${title.slice(0, 20)}...` : title}
             </h3>
           </div>
-          <div className="text-sm font-medium text-gray-900">Rs. {price}</div>
+          <div className="text-sm font-medium text-gray-900">Rs.{price.length > 6 ? `${price.slice(0, 6)}...` : price}</div>
         </div>
         <div className="flex justify-between">
           <p className="mt-1 text-sm text-gray-500">{category}</p>

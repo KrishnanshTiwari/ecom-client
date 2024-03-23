@@ -45,7 +45,7 @@ export default function Product() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("http://localhost:8000/getproducts", {
+      const response = await fetch("https://ecommerce-backend-w0k9.onrender.com/getproducts", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -350,7 +350,7 @@ export default function Product() {
                       .map((product) => (
                         <div
                           className="sm:w-[40%] w-full my-3 mx-auto"
-                          key={product.id}
+                          key={product._id}
                         >
                           <ProductCard data={product} />
                         </div>

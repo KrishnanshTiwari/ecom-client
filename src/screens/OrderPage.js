@@ -8,7 +8,7 @@ function OrderPage() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch("http://localhost:8000/user/getorders", {
+      const response = await fetch("https://ecommerce-backend-w0k9.onrender.com/user/getorders", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -42,19 +42,29 @@ function OrderPage() {
               <div className="flex flex-col">
                 {orders.map((product) => (
                   <div
-                    key={product.id}
+                    key={product._id}
                     className="bg-white py-6 sm:px-8 px-4 mb-4 shadow-sm flex sm:flex-row flex-col"
                   >
                     <div className="flex flex-col mr-3  sm:w-[30%]">
                       <div className="text-2xl font-bold">{product.date}</div>
                       <div className="text-sm font-semibold text-gray-600">
-                        Payment mode : Rs. {product.payment}
+                        Payment mode : {product.payment}
                       </div>
                       <div className="text-sm font-semibold text-gray-600">
                         Total Amount : Rs. {product.total}
                       </div>
                       <div className="text-sm font-semibold text-gray-600">
                         Net Payable Amount : Rs. {product.cost}
+                      </div>
+                      <div className="text-sm font-semibold ">
+                        {product?.shipping?.address}
+                      </div>
+                      <div className="text-sm font-semibold">
+                        <span>{product?.shipping?.zip} </span>
+                        <span>{product?.shipping?.city}</span>
+                      </div>
+                      <div className="text-sm font-semibold ">
+                        {product?.shipping?.state}
                       </div>
                       <div className="text-sm text-red-500">
                         (After discount and Platform fees)

@@ -6,51 +6,7 @@ import adidas from "../assets/adidas.png";
 import calvin from "../assets/calvin-klein.png";
 import levis from "../assets/levis.png";
 import poster from "../assets/poster.png";
-const products = [
-  {
-    id: 1,
-    title: "Basic T shirt",
-    href: "#",
-    image:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    price: "$35",
-    category: "Black",
-    rating: "4.5",
-  },
-  {
-    id: 2,
-    title: "Basic Tee",
-    href: "#",
-    image:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    category: "Black",
-    rating: "4.5",
-  },
-  {
-    id: 3,
-    title: "Basic Tee",
-    href: "#",
-    image:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    category: "Black",
-    rating: "4.5",
-  },
-  {
-    id: 4,
-    title: "Basic Tee",
-    href: "#",
-    image:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    category: "Black",
-    rating: "4.5",
-  },
-];
+import products from '../utils/constant';
 function Home() {
   return (
     <div className="pb-6">
@@ -108,24 +64,8 @@ function Home() {
           {/* This is our products list  */}
 
           {products.map((product) => (
-            <div className="w-[40%] sm:w-1/5">
-              <ProductCard key={product.id} data={product} />
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="bg-white shadow-xl mx-auto w-[95%] my-6 rounded-lg">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            New Arrivals
-          </h1>
-        </div>
-        <div className="flex flex-wrap pb-8 justify-around">
-          {/* This is our products list  */}
-
-          {products.map((product) => (
-            <div className="w-[40%] sm:w-1/5">
-              <ProductCard key={product.id} data={product} />
+            <div key={product._id} className="w-[40%] sm:w-1/5 mb-4">
+              <ProductCard data={product} />
             </div>
           ))}
         </div>

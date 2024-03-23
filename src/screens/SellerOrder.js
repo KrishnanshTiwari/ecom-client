@@ -9,7 +9,7 @@ function SellerOrder() {
   const fetchOrders = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/seller/sellerorderedproduct",
+        "https://ecommerce-backend-w0k9.onrender.com/seller/sellerorderedproduct",
         {
           method: "GET",
           headers: {
