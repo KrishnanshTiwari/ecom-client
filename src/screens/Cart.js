@@ -40,7 +40,7 @@ const Cart = () => {
     try {
       //setLoading(true);
       const response = await fetch(
-        `http://localhost:8000/user/deleteCart/${id}`,
+        `https://ecommerce-backend-w0k9.onrender.com/user/deleteCart/${id}`,
         {
           method: "DELETE",
           headers: {

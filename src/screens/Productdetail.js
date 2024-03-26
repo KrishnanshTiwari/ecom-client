@@ -13,7 +13,7 @@ function Productdetail() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/productdetail/${id}`,
+        `https://ecommerce-backend-w0k9.onrender.com/productdetail/${id}`,
         {
           method: "GET",
           headers: {
@@ -39,7 +39,7 @@ function Productdetail() {
     try {
       //setLoading(true);
       const response = await fetch(
-        `http://localhost:8000/user/addtocart/${id}`,
+        `https://ecommerce-backend-w0k9.onrender.com/user/addtocart/${id}`,
         {
           method: "POST",
           headers: {
